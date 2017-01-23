@@ -1,3 +1,17 @@
+import java.io.FileNotFoundException
+
+import sbt._
+import Keys._
+import de.heikoseeberger.sbtheader.HeaderPattern
+import de.heikoseeberger.sbtheader.license.Apache2_0
+import scalariform.formatter.preferences._
+import com.typesafe.sbt.SbtScalariform
+import sbtrelease._
+import ReleaseTransformations._
+import sbtrelease.ReleasePlugin._
+import ReleaseStateTransformations._
+import com.typesafe.sbt.pgp.PgpKeys
+
 // *****************************************************************************
 // Projects
 // *****************************************************************************
@@ -7,6 +21,7 @@ lazy val `scala-iso` =
     .in(file("."))
     .enablePlugins(AutomateHeaderPlugin, GitVersioning)
     .settings(settings)
+    .settings(publishSettings: _*)
     .settings(
       libraryDependencies ++= Seq(
         library.scalaCheck % Test,
@@ -34,7 +49,6 @@ lazy val library =
 
 lazy val settings =
   commonSettings ++
-  scalafmtSettings ++
   gitSettings ++
   headerSettings
 
@@ -50,9 +64,20 @@ lazy val commonSettings =
     scalacOptions ++= Seq(
       "-unchecked",
       "-deprecation",
-      "-language:_",
+      "-encoding", "utf8",
+      "-feature",
+      "-explaintypes",
       "-target:jvm-1.8",
-      "-encoding", "UTF-8"
+      "-language:_",
+      "-Ydelambdafy:method",
+      "-Xcheckinit",
+      "-Xfuture",
+      "-Xlint",
+      "-Xlint:-nullary-unit",
+      "-Ywarn-unused",
+      "-Ywarn-unused-import",
+      "-Ywarn-dead-code",
+      "-Ywarn-value-discard"
     ),
     javacOptions ++= Seq(
       "-source", "1.8",
@@ -61,27 +86,118 @@ lazy val commonSettings =
     unmanagedSourceDirectories.in(Compile) :=
       Seq(scalaSource.in(Compile).value),
     unmanagedSourceDirectories.in(Test) :=
-      Seq(scalaSource.in(Test).value)
+      Seq(scalaSource.in(Test).value),
+    SbtScalariform.autoImport.scalariformPreferences := SbtScalariform.autoImport.scalariformPreferences.value
+      .setPreference(AlignSingleLineCaseStatements, true)
+      .setPreference(AlignSingleLineCaseStatements.MaxArrowIndent, 100)
+      .setPreference(DoubleIndentClassDeclaration, true)
+      .setPreference(RewriteArrowSymbols, true)
+      .setPreference(AlignParameters, true)
+      .setPreference(AlignArguments, true)
+      .setPreference(DoubleIndentClassDeclaration, true)
+      .setPreference(DanglingCloseParenthesis, Preserve),
+    wartremoverWarnings ++= Warts.unsafe
 )
-
-lazy val scalafmtSettings =
-  reformatOnCompileSettings ++
-  Seq(
-    formatSbtFiles := false,
-    scalafmtConfig :=
-      Some(baseDirectory.in(ThisBuild).value / ".scalafmt.conf"),
-    ivyScala :=
-      ivyScala.value.map(_.copy(overrideScalaVersion = sbtPlugin.value)) // TODO Remove once this workaround no longer needed (https://github.com/sbt/sbt/issues/2786)!
-  )
 
 lazy val gitSettings =
   Seq(
     git.useGitDescribe := true
   )
 
-import de.heikoseeberger.sbtheader.HeaderPattern
-import de.heikoseeberger.sbtheader.license.Apache2_0
+
 lazy val headerSettings =
   Seq(
-    headers := Map("scala" -> Apache2_0("2017", "Vitor S. Vieira"))
+    headers := Map(
+      "scala" -> Apache2_0("2017", "Vitor S. Vieira"),
+      "conf"  -> Apache2_0("2017", "Vitor S. Vieira", "#")
+    )
   )
+lazy val dontPublishSettings = Seq(
+  //publishSigned := (),
+  publish := (),
+  publishLocal := (),
+  publishArtifact := false
+)
+
+lazy val publishSettings = Seq(
+  credentials += Credentials(Path.userHome / ".ivy2" / ".credentials"),
+  publishTo <<= version.apply {
+    v =>
+    val nexus = "https://oss.sonatype.org/"
+    if (v.trim.endsWith("SNAPSHOT")) {
+      Some("snapshots" at nexus + "content/repositories/snapshots")
+    } else {
+      Some("releases" at nexus + "service/local/staging/deploy/maven2")
+    }
+  },
+
+  externalResolvers <<= resolvers map { rs =>
+  Resolver.withDefaultResolvers(rs, mavenCentral = true)
+  },
+
+  // Release settings
+  publishMavenStyle := true,
+  pomIncludeRepository := { _ => false },
+  releaseCrossBuild             := true,
+  releasePublishArtifactsAction := PgpKeys.publishSigned.value,
+  publishMavenStyle             := true,
+  publishArtifact in Test       := false,
+  pomExtra := {
+    <url>https://github.com/vitorsvieira/scala-iso</url>
+      <licenses>
+        <license>
+          <name>Apache 2</name>
+          <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+      </licenses>
+      <scm>
+        <url>git@github.com:vitorsvieira/scala-iso.git</url>
+        <connection>scm:git:git@github.com:vitorsvieira/scala-iso.git</connection>
+      </scm>
+      <developers>
+        <developer>
+          <id>vitorsvieira</id>
+          <name>Vitor Vieira</name>
+          <url>http://github.com/vitorsvieira</url>
+        </developer>
+      </developers>
+  },
+
+  releaseProcess := Seq[ReleaseStep](
+    checkSnapshotDependencies,
+    inquireVersions,
+    runClean,
+    runTest,
+    setReleaseVersion,
+    commitReleaseVersion,
+    tagRelease,
+    publishArtifacts,
+    setNextVersion,
+    commitNextVersion,
+    pushChanges
+  )
+)
+
+//get the tools.jar JDK dependency
+val JavaTools = List[Option[String]] (
+  // manual
+  sys.env.get("JDK_HOME"),
+  sys.env.get("JAVA_HOME"),
+  // osx
+  try Some("/usr/libexec/java_home".!!.trim)
+  catch {
+    case _: Throwable => None
+  },
+  // fallback
+  sys.props.get("java.home").map(new File(_).getParent),
+  sys.props.get("java.home")
+).flatten.map { n =>
+new File(n + "/lib/tools.jar")
+}.find(_.exists).getOrElse (
+  throw new FileNotFoundException (
+    """Could not automatically find the JDK/lib/tools.jar.
+      |You must explicitly set JDK_HOME or JAVA_HOME.""".stripMargin
+  )
+)
+parallelExecution in Test := false
+fork in Test := true
