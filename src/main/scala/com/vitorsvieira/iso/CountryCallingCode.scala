@@ -301,7 +301,7 @@ object CountryCallingCode extends Enum {
   def apply(phoneCode: String): CountryCallingCode =
     CountryCallingCode.values.find(phoneCode == _.toString) match {
       case Some(code) ⇒ code
-      case _          ⇒ throw new ParseException(s"Invalid value '$phoneCode' for ISOCountry")
+      case None          ⇒ throw new ParseException(s"Invalid value '$phoneCode' for ISOCountry")
     }
 
   /**

@@ -13,13 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.vitorsvieira.iso
 
 import com.vitorsvieira.iso.ISOCountry.ISOCountry
 
 /**
- *
  * ISO 4217 is the International Standard for currency codes.
  * The most recent edition is ISO 4217:2015 updated in January/2017.
  * Up-to-date list can be found for free on the
