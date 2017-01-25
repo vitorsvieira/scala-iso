@@ -49,7 +49,7 @@ object ISOContinent extends Enum {
     }
 
   /**
-   * Retrieves ISOContinent based on alpha-2 continent code.
+   * Retrieves Option[ISOContinent] based on alpha-2 continent code.
    * https://www.iso.org/obp/ui/#search
    *
    * @param continentCode Country code, ie. NA, AF

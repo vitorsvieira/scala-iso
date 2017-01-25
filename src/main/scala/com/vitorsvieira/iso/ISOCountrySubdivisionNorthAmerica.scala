@@ -23,7 +23,7 @@ package com.vitorsvieira.iso
  * The official name of the standard is
  * "Codes for the representation of names of countries and their subdivisions – Part 2: Country subdivision code."
  */
-object ISOCountrySubdivisionNorthAmerica extends CountrySubdivision {
+trait ISOCountrySubdivisionNorthAmerica extends CountrySubdivision {
   // format: OFF
     val `Saint John Antigua and Barbuda`             = new ISOCountrySubdivision(ISOCountry.ANTIGUA_AND_BARBUDA, "Saint John", "AG-04")
     val `Saint Mary Antigua and Barbuda`             = new ISOCountrySubdivision(ISOCountry.ANTIGUA_AND_BARBUDA, "Saint Mary", "AG-05")
@@ -348,3 +348,4 @@ object ISOCountrySubdivisionNorthAmerica extends CountrySubdivision {
     val `Saint George`                               = new ISOCountrySubdivision(ISOCountry.SAINT_VINCENT_AND_THE_GRENADINES, "Saint George", "VC-04")
   // format: ON
 }
+object ISOCountrySubdivisionNorthAmerica extends ISOCountrySubdivisionNorthAmerica

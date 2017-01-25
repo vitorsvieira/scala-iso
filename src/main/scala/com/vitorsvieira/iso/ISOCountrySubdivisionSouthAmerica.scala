@@ -23,7 +23,7 @@ package com.vitorsvieira.iso
  * The official name of the standard is
  * "Codes for the representation of names of countries and their subdivisions – Part 2: Country subdivision code."
  */
-object ISOCountrySubdivisionSouthAmerica extends CountrySubdivision {
+trait ISOCountrySubdivisionSouthAmerica extends CountrySubdivision {
   // format: OFF
   val `Buenos Aires`                             = new ISOCountrySubdivision(ISOCountry.ARGENTINA, "Buenos Aires", "AR-B")
   val `Catamarca`                                = new ISOCountrySubdivision(ISOCountry.ARGENTINA, "Catamarca", "AR-K")
@@ -260,3 +260,4 @@ object ISOCountrySubdivisionSouthAmerica extends CountrySubdivision {
   val `Treinta y Tres`                           = new ISOCountrySubdivision(ISOCountry.URUGUAY, "Treinta y Tres", "UY-TT")
   // format: ON
 }
+object ISOCountrySubdivisionSouthAmerica extends ISOCountrySubdivisionSouthAmerica

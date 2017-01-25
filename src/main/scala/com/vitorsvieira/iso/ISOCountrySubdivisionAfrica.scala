@@ -23,7 +23,7 @@ package com.vitorsvieira.iso
  * The official name of the standard is
  * "Codes for the representation of names of countries and their subdivisions – Part 2: Country subdivision code."
  */
-object ISOCountrySubdivisionAfrica extends CountrySubdivision {
+trait ISOCountrySubdivisionAfrica extends CountrySubdivision {
   // format: OFF
   val `Bengo`                                    = new ISOCountrySubdivision(ISOCountry.ANGOLA, "Bengo", "AO-BGO")
   val `Benguela`                                 = new ISOCountrySubdivision(ISOCountry.ANGOLA, "Benguela", "AO-BGU")
@@ -885,4 +885,4 @@ object ISOCountrySubdivisionAfrica extends CountrySubdivision {
   val `Midlands`                                 = new ISOCountrySubdivision(ISOCountry.ZIMBABWE, "Midlands", "ZW-MI")
   // format: ON
 }
-
+object ISOCountrySubdivisionAfrica extends ISOCountrySubdivisionAfrica

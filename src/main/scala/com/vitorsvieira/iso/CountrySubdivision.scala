@@ -16,6 +16,8 @@
 
 package com.vitorsvieira.iso
 
+import com.vitorsvieira.iso.ISOCountry.ISOCountry
+
 /**
  * ISO 3166-2 is part of the ISO 3166 standard
  * and defines codes for identifying the principal subdivisions
@@ -23,35 +25,55 @@ package com.vitorsvieira.iso
  * The official name of the standard is
  * "Codes for the representation of names of countries and their subdivisions – Part 2: Country subdivision code."
  */
-trait CountrySubdivision extends Enum { self ⇒
+trait CountrySubdivision extends Enum {
 
   import com.vitorsvieira.iso.ISOCountry.ISOCountry
 
-  sealed class EnumVal(val country: ISOCountry, val subdivision: String, val value: String) extends Value
+  sealed class EnumVal(
+    val country:         ISOCountry,
+    val subdivisionName: String,
+    val value:           String) extends Value
 
   type ISOCountrySubdivision = EnumVal
+}
+
+object ISOCountrySubdivision
+    extends ISOCountrySubdivisionAfrica
+    with ISOCountrySubdivisionAsia
+    with ISOCountrySubdivisionEurope
+    with ISOCountrySubdivisionNorthAmerica
+    with ISOCountrySubdivisionSouthAmerica
+    with ISOCountrySubdivisionOceania {
 
   /**
-   * Retrieves ISOCountrySubdivision based on xx-xx code.
+   * Retrieves ISOCountrySubdivision based on 3166-2 xx-xx code.
    * https://www.iso.org/obp/ui/#search
    *
-   * @param countryCode Country code, ie. US-NY, US-AL
+   * @param subdivisionCode Country code, ie. US-NY, US-AL
    * @return ISOCountrySubdivision
    */
-  def apply(countryCode: String): ISOCountrySubdivision = self.values.find(countryCode == _.toString) match {
+  def apply(subdivisionCode: String): ISOCountrySubdivision = ISOCountrySubdivision.values.find(subdivisionCode == _.toString) match {
     case Some(country) ⇒ country
-    case None          ⇒ throw new ParseException(s"Invalid value '$countryCode' for ISOCountrySubdivision")
+    case None          ⇒ throw new ParseException(s"Invalid 3166-2 code '$subdivisionCode' for ISOCountrySubdivision")
   }
 
   /**
-   * Retrieves ISOCountrySubdivision based on xx-xx code.
+   * Retrieves Option[ISOCountrySubdivision] based on 3166-2 xx-xx code.
    * https://www.iso.org/obp/ui/#search
    *
-   * @param countryCode Country code, ie. US-NY, US-AL
+   * @param subdivisionCode Country code, ie. US-NY, US-AL
    * @return Option[ISOCountrySubdivision]
    */
-  def from(countryCode: String): Option[ISOCountrySubdivision] = self.values.find(countryCode == _.toString) match {
-    case opt @ Some(_) ⇒ opt
-    case opt @ None    ⇒ opt
-  }
+  def from(subdivisionCode: String): Option[ISOCountrySubdivision] =
+    ISOCountrySubdivision.values.find(subdivisionCode == _.toString)
+
+  /**
+   * Retrieves Seq[ISOCountrySubdivision] based on xx-xx code.
+   * https://www.iso.org/obp/ui/#search
+   *
+   * @param country ie. ISOCountry.JAPAN, ISOCountry.CANADA
+   * @return Option[ISOCountrySubdivision]
+   */
+  def fromCountry(country: ISOCountry): Seq[ISOCountrySubdivision] =
+    ISOCountrySubdivision.values.filter(_.country == country)
 }

@@ -23,7 +23,7 @@ package com.vitorsvieira.iso
  * The official name of the standard is
  * "Codes for the representation of names of countries and their subdivisions – Part 2: Country subdivision code."
  */
-object ISOCountrySubdivisionEurope extends CountrySubdivision {
+trait ISOCountrySubdivisionEurope extends CountrySubdivision {
   // format: OFF
   val `Andorra la Vella`                           = new ISOCountrySubdivision(ISOCountry.ANDORRA, "Andorra la Vella", "AD-07")
   val `Canillo`                                    = new ISOCountrySubdivision(ISOCountry.ANDORRA, "Canillo", "AD-02")
@@ -883,3 +883,4 @@ object ISOCountrySubdivisionEurope extends CountrySubdivision {
   val `Zhytomyrs'ka Oblast'`                       = new ISOCountrySubdivision(ISOCountry.UKRAINE, "Zhytomyrs'ka Oblast'", "UA-18")
   // format: ON
 }
+object ISOCountrySubdivisionEurope extends ISOCountrySubdivisionEurope

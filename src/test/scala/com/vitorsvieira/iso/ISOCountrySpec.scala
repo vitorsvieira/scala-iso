@@ -56,6 +56,16 @@ class ISOCountrySpec extends WordSpec {
       assert(ISOCountry(840).value == "US")
     }
 
+    "return list of ISOCountry based on ISOContinent" in {
+      assert(ISOCountry.fromContinent(ISOContinent.ANTARCTICA) ==
+        Seq(
+          ISOCountry.ANTARCTICA,
+          ISOCountry.BOUVET_ISLAND,
+          ISOCountry.FRENCH_SOUTHERN_TERRITORIES,
+          ISOCountry.HEARD_ISLAND_AND_MCDONALD_ISLANDS,
+          ISOCountry.SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS))
+    }
+
     "return ISOCountry numericalCode property" in {
       assert(ISOCountry("US").numericalCode == 840)
     }

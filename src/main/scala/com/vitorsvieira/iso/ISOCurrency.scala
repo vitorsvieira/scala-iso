@@ -398,30 +398,71 @@ object ISOCurrency extends Enum {
   val ZLOTY              = new ISOCurrency("PLN", 985, 2, ISOCountry.POLAND)
   // format: ON
 
+  /**
+   * Retrieves ISOCurrency based on currency code.
+   * https://www.iso.org/obp/ui/#search
+   *
+   * @param currencyCode Currency code, ie. USD, CAD
+   * @return CountryCallingCode
+   */
   def apply(currencyCode: String): ISOCurrency =
     ISOCurrency.values.find(currencyCode == _.toString) match {
       case Some(currency) ⇒ currency
       case _              ⇒ throw new ParseException(s"Invalid currency code '$currencyCode' for ISOCurrency")
     }
 
+  /**
+   * Retrieves Option[ISOCurrency] based on currency code.
+   * https://www.iso.org/obp/ui/#search
+   *
+   * @param currencyCode Currency code, ie. USD, CAD
+   * @return CountryCallingCode
+   */
   def from(currencyCode: String): Option[ISOCurrency] =
     ISOCurrency.values.find(currencyCode == _.toString)
 
+  /**
+   * Retrieves ISOCurrency using ISOCountry.
+   * https://www.iso.org/obp/ui/#search
+   *
+   * @param country ISOCountry.JAPAN, ISOCountry("US")
+   * @return Option[CountryCallingCode]
+   */
   def apply(country: ISOCountry): ISOCurrency =
     ISOCurrency.values.find(_.countries.contains(country)) match {
       case Some(currency) ⇒ currency
       case _              ⇒ throw new ParseException(s"Invalid country '$country' for ISOCurrency")
     }
 
+  /**
+   * Retrieves Option[ISOCurrency] using ISOCountry.
+   * https://www.iso.org/obp/ui/#search
+   *
+   * @param country ISOCountry.JAPAN, ISOCountry("US")
+   * @return Option[CountryCallingCode]
+   */
   def from(country: ISOCountry): Option[ISOCurrency] =
     ISOCurrency.values.find(_.countries.contains(country))
 
-  def apply(numericCode: Int): ISOCurrency =
-    ISOCurrency.values.find(_.numericalCode == numericCode) match {
+  /**
+   * Retrieves ISOCurrency using numerical code.
+   * https://www.iso.org/obp/ui/#search
+   *
+   * @param numericalCode ie. 840, 392
+   * @return Option[CountryCallingCode]
+   */
+  def apply(numericalCode: Int): ISOCurrency =
+    ISOCurrency.values.find(_.numericalCode == numericalCode) match {
       case Some(currency) ⇒ currency
-      case _              ⇒ throw new ParseException(s"Invalid numeric code '$numericCode' for ISOCurrency")
+      case _              ⇒ throw new ParseException(s"Invalid numeric code '$numericalCode' for ISOCurrency")
     }
-
-  def from(numericCode: Int): Option[ISOCurrency] =
-    ISOCurrency.values.find(_.numericalCode == numericCode)
+  /**
+   * Retrieves Option[ISOCurrency] using numerical code.
+   * https://www.iso.org/obp/ui/#search
+   *
+   * @param numericalCode ie. 840, 392
+   * @return Option[CountryCallingCode]
+   */
+  def from(numericalCode: Int): Option[ISOCurrency] =
+    ISOCurrency.values.find(_.numericalCode == numericalCode)
 }

@@ -304,7 +304,7 @@ object ISOCountry extends Enum {
     }
 
   /**
-   * Retrieves ISOCountry based on alpha-2 code.
+   * Retrieves Option[ISOCountry] based on alpha-2 code.
    * https://www.iso.org/obp/ui/#search
    *
    * @param countryCode Country code, ie. US, CN
@@ -327,7 +327,7 @@ object ISOCountry extends Enum {
     }
 
   /**
-   * Retrieves ISOCountry based on numeric code.
+   * Retrieves Option[ISOCountry] based on numeric code.
    * https://www.iso.org/obp/ui/#search
    *
    * @param numericCode Numeric code, ie. 840, 826
@@ -335,4 +335,14 @@ object ISOCountry extends Enum {
    */
   def from(numericCode: Int): Option[ISOCountry] =
     ISOCountry.values.find(numericCode == _.numericalCode)
+
+  /**
+   * Retrieves Seq[ISOCountry] based on ISOContinent.
+   * https://www.iso.org/obp/ui/#search
+   *
+   * @param continent ISOContinent.NORTH_AMERICA, ISOContinent.ASIA
+   * @return Option[ISOCountry]
+   */
+  def fromContinent(continent: ISOContinent): Seq[ISOCountry] =
+    ISOCountry.values.filter(_.continent == continent)
 }

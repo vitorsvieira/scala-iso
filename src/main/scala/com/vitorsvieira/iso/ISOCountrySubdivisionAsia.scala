@@ -23,7 +23,7 @@ package com.vitorsvieira.iso
  * The official name of the standard is
  * "Codes for the representation of names of countries and their subdivisions – Part 2: Country subdivision code."
  */
-object ISOCountrySubdivisionAsia extends CountrySubdivision {
+trait ISOCountrySubdivisionAsia extends CountrySubdivision {
   // format: OFF
   val `'Ajman`                                   = new ISOCountrySubdivision(ISOCountry.UNITED_ARAB_EMIRATES, "'Ajman", "AE-AJ")
   val `Abu Zaby`                                 = new ISOCountrySubdivision(ISOCountry.UNITED_ARAB_EMIRATES, "Abu Zaby", "AE-AZ")
@@ -1071,3 +1071,4 @@ object ISOCountrySubdivisionAsia extends CountrySubdivision {
   val `Ta'izz`                                   = new ISOCountrySubdivision(ISOCountry.YEMEN, "Ta'izz", "YE-TA")
   // format: ON
 }
+object ISOCountrySubdivisionAsia extends ISOCountrySubdivisionAsia

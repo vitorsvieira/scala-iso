@@ -23,7 +23,7 @@ package com.vitorsvieira.iso
  * The official name of the standard is
  * "Codes for the representation of names of countries and their subdivisions – Part 2: Country subdivision code."
  */
-object ISOCountrySubdivisionOceania extends CountrySubdivision {
+trait ISOCountrySubdivisionOceania extends CountrySubdivision {
   // format: OFF
   val `Australian Capital Territory` = new ISOCountrySubdivision(ISOCountry.AUSTRALIA, "Australian Capital Territory", "AU-ACT")
   val `New South Wales`              = new ISOCountrySubdivision(ISOCountry.AUSTRALIA, "New South Wales", "AU-NSW")
@@ -138,3 +138,4 @@ object ISOCountrySubdivisionOceania extends CountrySubdivision {
   val `Tuamasaga`                    = new ISOCountrySubdivision(ISOCountry.SAMOA, "Tuamasaga", "WS-TU")
   // format: ON
 }
+object ISOCountrySubdivisionOceania extends ISOCountrySubdivisionOceania
