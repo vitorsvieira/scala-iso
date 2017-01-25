@@ -290,8 +290,8 @@ object CountryCallingCode extends Enum {
   val `+883`   = new CountryCallingCode("883", 883)
   val `+888`   = new CountryCallingCode("888", 888)
   val `+979`   = new CountryCallingCode("979", 979)
-
   // format: ON
+
   /**
    * Retrieves CountryCallingCode based on calling code.
    *
@@ -301,7 +301,7 @@ object CountryCallingCode extends Enum {
   def apply(phoneCode: String): CountryCallingCode =
     CountryCallingCode.values.find(phoneCode == _.toString) match {
       case Some(code) ⇒ code
-      case None          ⇒ throw new ParseException(s"Invalid value '$phoneCode' for ISOCountry")
+      case None       ⇒ throw new ParseException(s"Invalid value '$phoneCode' for CountryCallingCode")
     }
 
   /**
@@ -311,38 +311,38 @@ object CountryCallingCode extends Enum {
    * @return Option[ISOCouCountryCallingCodentry]
    */
   def from(phoneCode: String): Option[CountryCallingCode] =
-    CountryCallingCode.values.find(phoneCode == _.toString) match {
-      case opt @ Some(_) ⇒ opt
-      case opt @ None    ⇒ opt
+    CountryCallingCode.values.find(phoneCode == _.toString)
+
+  /**
+   * Retrieves CountryCallingCode based on numeric code.
+   * https://www.iso.org/obp/ui/#search
+   *
+   * @param numericalCode Numeric code, ie. 1, 33
+   * @return CountryCallingCode
+   */
+  def apply(numericalCode: Int): CountryCallingCode =
+    CountryCallingCode.values.find(numericalCode == _.numericalCode) match {
+      case Some(country) ⇒ country
+      case _ ⇒
+        throw new ParseException(s"Invalid country calling code '$numericalCode' for CountryCallingCode")
     }
 
-  //
-  //  /**
-  //    * Retrieves ISOCountry based on numeric code.
-  //    * https://www.iso.org/obp/ui/#search
-  //    *
-  //    * @param numericCode Numeric code, ie. 840, 826
-  //    * @return ISOCountry
-  //    */
-  //  def apply(numericCode: Int): ISOCountry =
-  //    ISOCountry.values.find(numericCode == _.numericalCode) match {
-  //      case Some(country) ⇒ country
-  //      case _             ⇒
-  //      throw new ParseException(
-  //        s"Invalid numeric code '$numericCode' for ISOCountry"
-  //      )
-  //    }
-  //
-  //  /**
-  //    * Retrieves ISOCountry based on numeric code.
-  //    * https://www.iso.org/obp/ui/#search
-  //    *
-  //    * @param numericCode Numeric code, ie. 840, 826
-  //    * @return Option[ISOCountry]
-  //    */
-  //  def from(numericCode: Int): Option[ISOCountry] =
-  //    ISOCountry.values.find(numericCode == _.numericalCode) match {
-  //      case opt@Some(_) ⇒ opt
-  //      case opt@None    ⇒ opt
-  //    }
+  /**
+   * Retrieves CountryCallingCode based on numeric code.
+   * https://www.iso.org/obp/ui/#search
+   *
+   * @param numericCode Numeric code, ie. 1, 3
+   * @return Option[CountryCallingCode]
+   */
+  def from(numericCode: Int): Option[CountryCallingCode] =
+    CountryCallingCode.values.find(numericCode == _.numericalCode)
+
+  def apply(country: ISOCountry): CountryCallingCode =
+    CountryCallingCode.values.find(_.countries.contains(country)) match {
+      case Some(currency) ⇒ currency
+      case _              ⇒ throw new ParseException(s"Invalid country '$country' for CountryCallingCode")
+    }
+
+  def from(country: ISOCountry): Option[CountryCallingCode] =
+    CountryCallingCode.values.find(_.countries.contains(country))
 }

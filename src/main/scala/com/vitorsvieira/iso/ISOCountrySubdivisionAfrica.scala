@@ -17,12 +17,12 @@
 package com.vitorsvieira.iso
 
 /**
-  * ISO 3166-2 is part of the ISO 3166 standard
-  * and defines codes for identifying the principal subdivisions
-  * (e.g., provinces or states) of all countries coded in ISO 3166-1.
-  * The official name of the standard is
-  * "Codes for the representation of names of countries and their subdivisions – Part 2: Country subdivision code."
-  */
+ * ISO 3166-2 is part of the ISO 3166 standard
+ * and defines codes for identifying the principal subdivisions
+ * (e.g., provinces or states) of all countries coded in ISO 3166-1.
+ * The official name of the standard is
+ * "Codes for the representation of names of countries and their subdivisions – Part 2: Country subdivision code."
+ */
 object ISOCountrySubdivisionAfrica extends CountrySubdivision {
   // format: OFF
   val `Bengo`                                    = new ISOCountrySubdivision(ISOCountry.ANGOLA, "Bengo", "AO-BGO")

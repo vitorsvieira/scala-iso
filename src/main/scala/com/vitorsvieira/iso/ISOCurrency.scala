@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.vitorsvieira.iso
 
 import com.vitorsvieira.iso.ISOCountry.ISOCountry
@@ -29,10 +30,10 @@ import com.vitorsvieira.iso.ISOCountry.ISOCountry
  */
 object ISOCurrency extends Enum {
   sealed class EnumVal(
-    val value:       String,
-    val numericCode: Int,
-    val minorUnit:   Int,
-    val countries:   ISOCountry*
+    val value:         String,
+    val numericalCode: Int,
+    val minorUnit:     Int,
+    val countries:     ISOCountry*
   ) extends Value
 
   type ISOCurrency = EnumVal
@@ -400,43 +401,27 @@ object ISOCurrency extends Enum {
   def apply(currencyCode: String): ISOCurrency =
     ISOCurrency.values.find(currencyCode == _.toString) match {
       case Some(currency) ⇒ currency
-      case _ ⇒
-        throw new ParseException(
-          s"Invalid value '$currencyCode' for ISOCurrency"
-        )
+      case _              ⇒ throw new ParseException(s"Invalid currency code '$currencyCode' for ISOCurrency")
     }
 
   def from(currencyCode: String): Option[ISOCurrency] =
-    ISOCurrency.values.find(currencyCode == _.toString) match {
-      case optCurrency @ Some(_) ⇒ optCurrency
-      case optCurrency @ None    ⇒ optCurrency
-    }
+    ISOCurrency.values.find(currencyCode == _.toString)
 
   def apply(country: ISOCountry): ISOCurrency =
     ISOCurrency.values.find(_.countries.contains(country)) match {
       case Some(currency) ⇒ currency
-      case _ ⇒
-        throw new ParseException(s"Invalid country '$country' for ISOCurrency")
+      case _              ⇒ throw new ParseException(s"Invalid country '$country' for ISOCurrency")
     }
 
   def from(country: ISOCountry): Option[ISOCurrency] =
-    ISOCurrency.values.find(_.countries.contains(country)) match {
-      case optCurrency @ Some(_) ⇒ optCurrency
-      case optCurrency @ None    ⇒ optCurrency
-    }
+    ISOCurrency.values.find(_.countries.contains(country))
 
   def apply(numericCode: Int): ISOCurrency =
-    ISOCurrency.values.find(_.numericCode == numericCode) match {
+    ISOCurrency.values.find(_.numericalCode == numericCode) match {
       case Some(currency) ⇒ currency
-      case _ ⇒
-        throw new ParseException(
-          s"Invalid numeric code '$numericCode' for ISOCurrency"
-        )
+      case _              ⇒ throw new ParseException(s"Invalid numeric code '$numericCode' for ISOCurrency")
     }
 
   def from(numericCode: Int): Option[ISOCurrency] =
-    ISOCurrency.values.find(_.numericCode == numericCode) match {
-      case optCurrency @ Some(_) ⇒ optCurrency
-      case optCurrency @ None    ⇒ optCurrency
-    }
+    ISOCurrency.values.find(_.numericalCode == numericCode)
 }
