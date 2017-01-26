@@ -345,6 +345,6 @@ object ISOCountry extends Enum {
    * @param continent ISOContinent.NORTH_AMERICA, ISOContinent.ASIA
    * @return Option[ISOCountry]
    */
-  def fromContinent(continent: ISOContinent): Seq[ISOCountry] =
+  def fromContinent(continent: ISOContinent): Vector[ISOCountry] =
     ISOCountry.values.filter(_.continent == continent)
 }

@@ -72,6 +72,6 @@ object ISOCountrySubdivision
    * @param country ie. ISOCountry.JAPAN, ISOCountry.CANADA
    * @return Option[ISOCountrySubdivision]
    */
-  def fromCountry(country: ISOCountry): Seq[ISOCountrySubdivision] =
+  def fromCountry(country: ISOCountry): Vector[ISOCountrySubdivision] =
     ISOCountrySubdivision.values.filter(_.country == country)
 }

@@ -54,13 +54,10 @@ lazy val settings =
 
 lazy val commonSettings =
   Seq(
-//    version      := "0.1.0-SNAPSHOT",
     organization := "com.vitorsvieira",
     scalaVersion := "2.12.1",
     crossScalaVersions := Seq("2.11.8", scalaVersion.value),
     crossVersion := CrossVersion.binary,
-    licenses += ("Apache 2.0",
-                 url("http://www.apache.org/licenses/LICENSE-2.0")),
     mappings.in(Compile, packageBin) +=
       baseDirectory.in(ThisBuild).value / "LICENSE" -> "LICENSE",
     scalacOptions ++= Seq(

@@ -57,13 +57,34 @@ class ISOCountrySpec extends WordSpec {
     }
 
     "return list of ISOCountry based on ISOContinent" in {
-      assert(ISOCountry.fromContinent(ISOContinent.ANTARCTICA) ==
-        Seq.apply[ISOCountry](
-          ISOCountry.ANTARCTICA,
-          ISOCountry.BOUVET_ISLAND,
-          ISOCountry.FRENCH_SOUTHERN_TERRITORIES,
-          ISOCountry.HEARD_ISLAND_AND_MCDONALD_ISLANDS,
-          ISOCountry.SOUTH_GEORGIA_AND_THE_SOUTH_SANDWICH_ISLANDS))
+      assert(ISOCountry.fromContinent(ISOContinent.OCEANIA) ==
+        Vector.apply[ISOCountry](
+          ISOCountry("AS"),
+          ISOCountry("AU"),
+          ISOCountry("CK"),
+          ISOCountry("FJ"),
+          ISOCountry("PF"),
+          ISOCountry("GU"),
+          ISOCountry("KI"),
+          ISOCountry("MH"),
+          ISOCountry("FM"),
+          ISOCountry("NR"),
+          ISOCountry("NC"),
+          ISOCountry("NZ"),
+          ISOCountry("NU"),
+          ISOCountry("NF"),
+          ISOCountry("MP"),
+          ISOCountry("PW"),
+          ISOCountry("PG"),
+          ISOCountry("PN"),
+          ISOCountry("WS"),
+          ISOCountry("SB"),
+          ISOCountry("TK"),
+          ISOCountry("TO"),
+          ISOCountry("TV"),
+          ISOCountry("UM"),
+          ISOCountry("VU"),
+          ISOCountry("WF")))
     }
 
     "return ISOCountry numericalCode property" in {
