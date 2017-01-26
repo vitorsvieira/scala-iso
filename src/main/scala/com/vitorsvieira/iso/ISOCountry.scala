@@ -16,8 +16,6 @@
 
 package com.vitorsvieira.iso
 
-import com.vitorsvieira.iso.ISOContinent.ISOContinent
-
 /**
  * *
  * ISO 3166-1

@@ -16,8 +16,6 @@
 
 package com.vitorsvieira.iso
 
-import com.vitorsvieira.iso.ISOCountry.ISOCountry
-
 /**
  * ISO 3166-2 is part of the ISO 3166 standard
  * and defines codes for identifying the principal subdivisions
@@ -26,8 +24,6 @@ import com.vitorsvieira.iso.ISOCountry.ISOCountry
  * "Codes for the representation of names of countries and their subdivisions – Part 2: Country subdivision code."
  */
 trait CountrySubdivision extends Enum {
-
-  import com.vitorsvieira.iso.ISOCountry.ISOCountry
 
   sealed class EnumVal(
     val country:         ISOCountry,

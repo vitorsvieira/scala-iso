@@ -16,8 +16,6 @@
 
 package com.vitorsvieira.iso
 
-import com.vitorsvieira.iso.ISOCountry.ISOCountry
-
 /**
  * *
  * Country calling codes or country dial in codes are telephone dialing prefixes
