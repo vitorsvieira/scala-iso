@@ -14,7 +14,7 @@ scala-iso
 To get started with SBT, simply add the following to your `build.sbt` or `Build.scala` file:
 
 ``` scala   
-libraryDependencies += "com.vitorsvieira" %% "scala-iso" % "0.1.0"
+libraryDependencies += "com.vitorsvieira" %% "scala-iso" % "0.1.2"
 ```
 
 ## How to use
