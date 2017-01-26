@@ -16,6 +16,8 @@
 
 package com.vitorsvieira.iso
 
+import com.vitorsvieira.iso.ISOCountry.ISOCountry
+
 /**
  * ISO 3166-2 is part of the ISO 3166 standard
  * and defines codes for identifying the principal subdivisions

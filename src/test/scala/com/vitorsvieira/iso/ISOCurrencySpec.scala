@@ -16,9 +16,9 @@
 
 package com.vitorsvieira.iso
 
-import com.vitorsvieira.iso.ISOCountry.ISOCountry
 import org.scalatest._
 import Matchers._
+import com.vitorsvieira.iso.ISOCountry.ISOCountry
 import com.vitorsvieira.iso.ISOCurrency.ISOCurrency
 
 class ISOCurrencySpec extends WordSpec {
@@ -64,18 +64,18 @@ class ISOCurrencySpec extends WordSpec {
     }
 
     "return ISOCurrency code value property" in {
-      assert(ISOCurrency(840).value == "USD")
+      assert(ISOCurrency.apply(840).value == "USD")
     }
 
     "return ISOCurrency numericalCode property" in {
-      assert(ISOCurrency("USD").numericalCode == 840)
+      assert(ISOCurrency.apply("USD").numericalCode == 840)
     }
 
     "return ISOCurrency minorUnit property" in {
-      assert(ISOCurrency("USD").minorUnit == 2)
+      assert(ISOCurrency.apply("USD").minorUnit == 2)
     }
     "return ISOCurrency countries property" in {
-      assert(ISOCurrency("JPY").countries == Seq(ISOCountry.JAPAN))
+      assert(ISOCurrency.apply("JPY").countries == Seq(ISOCountry.JAPAN))
     }
 
     "return ParseException when currency code does not exist" in {

@@ -54,7 +54,7 @@ lazy val settings =
 
 lazy val commonSettings =
   Seq(
-    version      := "0.1.0-SNAPSHOT",
+//    version      := "0.1.0-SNAPSHOT",
     organization := "com.vitorsvieira",
     scalaVersion := "2.12.1",
     crossScalaVersions := Seq("2.11.8", scalaVersion.value),

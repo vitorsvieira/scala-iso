@@ -17,8 +17,8 @@
 package com.vitorsvieira.iso
 
 import org.scalatest._
-import org.scalatest.WordSpec
-import com.vitorsvieira.iso.ISOCountrySubdivision._
+import Matchers._
+import com.vitorsvieira.iso.ISOCountrySubdivision.ISOCountrySubdivision
 
 class CountrySubdivisionSpec extends WordSpec {
 
