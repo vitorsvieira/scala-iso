@@ -54,9 +54,10 @@ lazy val settings =
 
 lazy val commonSettings =
   Seq(
+    organization := "com.vitorsvieira",
     scalaVersion := "2.12.1",
     crossScalaVersions := Seq(scalaVersion.value, "2.11.8"),
-    organization := "com.vitorsvieira",
+    crossVersion := CrossVersion.binary,
     licenses += ("Apache 2.0",
                  url("http://www.apache.org/licenses/LICENSE-2.0")),
     mappings.in(Compile, packageBin) +=
