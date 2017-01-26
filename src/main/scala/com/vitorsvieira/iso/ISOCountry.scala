@@ -18,6 +18,8 @@ package com.vitorsvieira.iso
 
 import com.vitorsvieira.iso.ISOContinent.ISOContinent
 
+import scala.collection.immutable.Seq
+
 /**
  * *
  * ISO 3166-1
