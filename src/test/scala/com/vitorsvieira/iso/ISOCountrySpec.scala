@@ -58,7 +58,7 @@ class ISOCountrySpec extends WordSpec {
 
     "return list of ISOCountry based on ISOContinent" in {
       assert(ISOCountry.fromContinent(ISOContinent.ANTARCTICA) ==
-        Seq(
+        Seq.apply[ISOCountry](
           ISOCountry.ANTARCTICA,
           ISOCountry.BOUVET_ISLAND,
           ISOCountry.FRENCH_SOUTHERN_TERRITORIES,
