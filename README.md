@@ -2,7 +2,7 @@ scala-iso
 =========
 
 [![Build Status](https://travis-ci.org/vitorsvieira/scala-iso.svg?branch=master)](https://travis-ci.org/vitorsvieira/scala-iso)
-[![Software License](https://img.shields.io/badge/license-Apache 2-brightgreen.svg?style=flat)](LICENSE)
+[![Software License](https://img.shields.io/badge/license-Apache%202-brightgreen.svg?style=flat)](LICENSE)
 [![Maven Central](https://img.shields.io/maven-central/v/com.vitorsvieira/scala-iso_2.12.svg)](https://maven-badges.herokuapp.com/maven-central/com.vitorsvieira/scala-iso_2.12)
 
 ## Motivation
