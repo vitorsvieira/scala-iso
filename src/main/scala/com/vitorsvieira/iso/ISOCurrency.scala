@@ -66,7 +66,7 @@ object ISOCurrency extends Enum {
   val BELARUSSIAN_RUBLE     = new ISOCurrency("BYN", 974, 2, ISOCountry.BELARUS)
   val BELIZE_DOLLAR         = new ISOCurrency("BZD", 84, 2, ISOCountry.BELIZE)
   val BERMUDIAN_DOLLAR      = new ISOCurrency("BMD", 60, 2, ISOCountry.BERMUDA)
-  val BOLIVAR               = new ISOCurrency("VEF", 937, 2, ISOCountry.VENEZUELA)
+  val BOLIVAR               = new ISOCurrency("VES", 937, 2, ISOCountry.VENEZUELA)
   val BOLIVIANO             = new ISOCurrency("BOB", 68, 2, ISOCountry.BOLIVIA)
   val BRAZILIAN_REAL        = new ISOCurrency("BRL", 986, 2, ISOCountry.BRAZIL)
   val BRUNEI_DOLLAR         = new ISOCurrency("BND", 96, 2, ISOCountry.BRUNEI_DARUSSALAM)
@@ -126,7 +126,7 @@ object ISOCurrency extends Enum {
   )
   val DENAR                 = new ISOCurrency("MKD", 807, 2, ISOCountry.MACEDONIA)
   val DJIBOUTI_FRANC        = new ISOCurrency("DJF", 262, 0, ISOCountry.DJIBOUTI)
-  val DOBRA                 = new ISOCurrency("STD", 678, 2, ISOCountry.SAO_TOME_AND_PRINCIPE)
+  val DOBRA                 = new ISOCurrency("STN", 678, 2, ISOCountry.SAO_TOME_AND_PRINCIPE)
   val DOMINICAN_PESO        = new ISOCurrency("DOP", 214, 2, ISOCountry.DOMINICAN_REPUBLIC)
   val DONG                  = new ISOCurrency("VND", 704, 0, ISOCountry.VIET_NAM)
   val EAST_CARIBBEAN_DOLLAR = new ISOCurrency(
